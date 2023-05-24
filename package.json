@@ -1,0 +1,33 @@
+{
+  "name": "atelier-products-api",
+  "version": "1.0.0",
+  "description": "Back-end API for Atelier products",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stupendous-Stuffed-Crust/products-api.git"
+  },
+  "author": "David Tran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Stupendous-Stuffed-Crust/products-api/issues"
+  },
+  "homepage": "https://github.com/Stupendous-Stuffed-Crust/products-api#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.2.0",
+    "morgan": "^1.10.0",
+    "pg": "^8.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.41.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "nodemon": "^2.0.22"
+  }
+}
