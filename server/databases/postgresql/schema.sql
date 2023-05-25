@@ -62,10 +62,3 @@ ALTER TABLE photos ADD CONSTRAINT photos_styles_id_fkey FOREIGN KEY (style_id) R
 ALTER TABLE skus ADD CONSTRAINT skus_styles_id_fkey FOREIGN KEY (style_id) REFERENCES styles(id);
 ALTER TABLE related ADD CONSTRAINT related_current_product_id_fkey FOREIGN KEY (current_product_id) REFERENCES products(id);
 ALTER TABLE related ADD CONSTRAINT related_related_product_id_fkey FOREIGN KEY (related_product_id) REFERENCES products(id);
-
-\COPY products FROM '/home/davidguy/Documents/hack-reactor/SDC/products-api/csv-files/product.csv' DELIMITER ',' CSV HEADER;
-\COPY features FROM '/home/davidguy/Documents/hack-reactor/SDC/products-api/csv-files/features.csv' DELIMITER ',' CSV HEADER;
-\COPY styles FROM '/home/davidguy/Documents/hack-reactor/SDC/products-api/csv-files/styles.csv' DELIMITER ',' CSV HEADER;
-\COPY photos FROM '/home/davidguy/Documents/hack-reactor/SDC/products-api/csv-files/photos.csv' DELIMITER ',' CSV HEADER;
-\COPY skus FROM '/home/davidguy/Documents/hack-reactor/SDC/products-api/csv-files/skus.csv' DELIMITER ',' CSV HEADER;
-\COPY related FROM '/home/davidguy/Documents/hack-reactor/SDC/products-api/csv-files/related.csv' DELIMITER ',' CSV HEADER WHERE related_product_id > 0;
