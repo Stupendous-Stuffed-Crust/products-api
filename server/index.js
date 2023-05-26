@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 require('dotenv').config();
+const fs = require('fs');
 const express = require('express');
 const morgan = require('morgan');
 // const mongodbControllers = require('../databases/mongodb/controllers');
