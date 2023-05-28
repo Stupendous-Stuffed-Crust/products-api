@@ -8,7 +8,9 @@ module.exports = {
     return pool
       .query(query, values)
       .then((results) => results.rows)
-      .catch((err) => console.error(`PROBLEM GETTING PRODUCTS LIST, PAGE: ${page} COUNT: ${count}`, err.stack));
+      .catch((err) => {
+        throw new Error(`PROBLEM GETTING PRODUCTS LIST, PAGE: ${page} COUNT: ${count}: ${err.stack}`);
+      });
   },
   getProduct(productId) {
     const query = 'SELECT * FROM products WHERE id=$1';
@@ -16,7 +18,9 @@ module.exports = {
     return pool
       .query(query, values)
       .then((results) => results.rows)
-      .catch((err) => console.error(`PROBLEM GETTING PRODUCT ID ${productId}: `, err.stack));
+      .catch((err) => {
+        throw new Error(`PROBLEM GETTING PRODUCT ID ${productId}: ${err.stack}`);
+      });
   },
   getFeatures(productId) {
     const query = 'SELECT feature, value FROM features WHERE product_id=$1';
@@ -24,7 +28,27 @@ module.exports = {
     return pool
       .query(query, values)
       .then((results) => results.rows)
-      .catch((err) => console.error(`PROBLEM GETTING FEATURES FOR PRODUCT ID ${productId}: `, err.stack));
+      .catch((err) => {
+        throw new Error(`PROBLEM GETTING FEATURES FOR PRODUCT ID ${productId}: ${err.stack}`);
+      });
+  },
+  getProductDetails(productId) {
+    const query = `
+    SELECT
+    products.*,
+    (
+      SELECT json_agg(features_list)
+      FROM (SELECT feature, value FROM features WHERE features.product_id = products.id)
+      AS features_list
+    ) as features
+    FROM products WHERE id=$1`;
+    const values = [productId];
+    return pool
+      .query(query, values)
+      .then((results) => results.rows[0])
+      .catch((err) => {
+        throw new Error(`PROBLEM GETTING PRODUCT ID ${productId}: ${err.stack}`);
+      });
   },
   getRelated(productId) {
     const query = 'SELECT array_agg(related_product_id) FROM related WHERE current_product_id=$1';
@@ -32,7 +56,9 @@ module.exports = {
     return pool
       .query(query, values)
       .then((results) => results.rows[0].array_agg)
-      .catch((err) => console.error(`PROBLEM GETTING RELATED PRODUCTS FOR PRODUCT ID ${productId}: `, err.stack));
+      .catch((err) => {
+        throw new Error(`PROBLEM GETTING RELATED PRODUCTS FOR PRODUCT ID ${productId}: ${err.stack}`);
+      });
   },
   getStyles(productId) {
     const query = `
@@ -57,6 +83,8 @@ module.exports = {
     return pool
       .query(query, values)
       .then((stylesResults) => stylesResults.rows)
-      .catch((err) => console.error(`PROBLEM GETTING STYLES FOR PRODUCT ID ${productId}: `, err.stack));
+      .catch((err) => {
+        throw new Error(`PROBLEM GETTING STYLES FOR PRODUCT ID ${productId}: ${err.stack}`);
+      });
   },
 };

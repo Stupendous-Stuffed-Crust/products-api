@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS features CASCADE;
 DROP TABLE IF EXISTS products CASCADE;
 
 CREATE TABLE products (
- id BIGSERIAL,
+ id SERIAL,
  name TEXT NOT NULL,
  slogan TEXT,
  description TEXT,
@@ -16,7 +16,7 @@ CREATE TABLE products (
 );
 
 CREATE TABLE features (
- id BIGSERIAL,
+ id SERIAL,
  product_id INTEGER NOT NULL,
  feature TEXT,
  value TEXT,
@@ -24,7 +24,7 @@ CREATE TABLE features (
 );
 
 CREATE TABLE styles (
- id BIGSERIAL,
+ id SERIAL,
  product_id INTEGER NOT NULL,
  name TEXT NOT NULL,
  sale_price TEXT NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE styles (
 );
 
 CREATE TABLE photos (
- id BIGSERIAL,
+ id SERIAL,
  style_id INTEGER NOT NULL,
  url TEXT,
  thumbnail_url TEXT,
@@ -42,7 +42,7 @@ CREATE TABLE photos (
 );
 
 CREATE TABLE skus (
- id BIGSERIAL,
+ id SERIAL,
  style_id INTEGER NOT NULL,
  size TEXT NOT NULL,
  quantity INTEGER NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE skus (
 );
 
 CREATE TABLE related (
- id BIGSERIAL,
+ id SERIAL,
  current_product_id INTEGER NOT NULL,
  related_product_id INTEGER NOT NULL,
  PRIMARY KEY (id)
