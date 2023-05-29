@@ -12,20 +12,6 @@ module.exports = {
         res.sendStatus(500);
       });
   },
-  // getProductDetails(req, res) {
-  //   const productId = req.params.product_id;
-  //   let productDetails;
-  //   return models
-  //     .getProduct(productId)
-  //     .then((results) => {
-  //       [productDetails] = results;
-  //       return models.getFeatures(productId);
-  //     })
-  //     .then((results) => {
-  //       productDetails.features = results;
-  //       res.json(productDetails);
-  //     });
-  // },
   getProductDetails(req, res) {
     const productId = req.params.product_id;
     return models

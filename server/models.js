@@ -12,26 +12,6 @@ module.exports = {
         throw new Error(`PROBLEM GETTING PRODUCTS LIST, PAGE: ${page} COUNT: ${count}: ${err.stack}`);
       });
   },
-  getProduct(productId) {
-    const query = 'SELECT * FROM products WHERE id=$1';
-    const values = [productId];
-    return pool
-      .query(query, values)
-      .then((results) => results.rows)
-      .catch((err) => {
-        throw new Error(`PROBLEM GETTING PRODUCT ID ${productId}: ${err.stack}`);
-      });
-  },
-  getFeatures(productId) {
-    const query = 'SELECT feature, value FROM features WHERE product_id=$1';
-    const values = [productId];
-    return pool
-      .query(query, values)
-      .then((results) => results.rows)
-      .catch((err) => {
-        throw new Error(`PROBLEM GETTING FEATURES FOR PRODUCT ID ${productId}: ${err.stack}`);
-      });
-  },
   getProductDetails(productId) {
     const query = `
     SELECT
