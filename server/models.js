@@ -2,9 +2,10 @@ const pool = require('./db');
 
 module.exports = {
   getProducts(page = 1, count = 5) {
-    const offset = page > 1 ? (page * count) - count : 0;
-    const query = 'SELECT * FROM products LIMIT $1 OFFSET $2';
-    const values = [count, offset];
+    const countPerPage = count > 1000 ? 1000 : count;
+    const offset = page > 1 ? (page * countPerPage) - countPerPage : 0;
+    const query = 'SELECT * FROM products ORDER BY id ASC LIMIT $1 OFFSET $2';
+    const values = [countPerPage, offset];
     return pool
       .query(query, values)
       .then((results) => results.rows)
