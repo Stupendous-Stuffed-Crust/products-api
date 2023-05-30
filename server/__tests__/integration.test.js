@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const API = 'http://localhost:3000';
+const API = 'http://localhost:3001';
 
 describe('Integration Testing', () => {
   test('GET /products', async () => {
@@ -25,10 +25,10 @@ describe('Integration Testing', () => {
     expect(response.data.length).toBe(4);
   });
   test('GET /products/:product_id/styles', async () => {
-    const response = await axios.get(`${API}/products/1/styles`);
+    const response = await axios.get(`${API}/products/1000000/styles`);
     expect(response.status).toBe(200);
     expect(response.data).toBeTruthy();
-    expect(response.data.product_id).toBe('1');
-    expect(response.data.results.length).toBe(6);
-  }, 10000);
+    expect(response.data.product_id).toBe('1000000');
+    expect(response.data.results.length).toBe(3);
+  });
 });

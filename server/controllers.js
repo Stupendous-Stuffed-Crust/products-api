@@ -12,25 +12,17 @@ module.exports = {
         res.sendStatus(500);
       });
   },
-  // getProductDetails(req, res) {
-  //   const productId = req.params.product_id;
-  //   let productDetails;
-  //   return models
-  //     .getProduct(productId)
-  //     .then((results) => {
-  //       [productDetails] = results;
-  //       return models.getFeatures(productId);
-  //     })
-  //     .then((results) => {
-  //       productDetails.features = results;
-  //       res.json(productDetails);
-  //     });
-  // },
   getProductDetails(req, res) {
     const productId = req.params.product_id;
     return models
       .getProductDetails(productId)
-      .then((results) => res.json(results))
+      .then((results) => {
+        if (results) {
+          res.json(results);
+        } else {
+          res.status(404).send('This product does not exist.');
+        }
+      })
       .catch((err) => {
         console.error('PROBLEM GETTING PRODUCT DETAILS FROM DATABASE: ', err.stack);
         res.sendStatus(500);
